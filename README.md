@@ -41,3 +41,38 @@ for (int i : nums1) {
 }
 
 ```
+
+### (2) 重复
+* hashset方法
+
+```java
+// 第一种解法： hashset
+    // static class Solution {
+    // public boolean containsDuplicate(int[] nums) {
+    // HashSet<Integer> set = new HashSet<>();
+    // for (int i = 0; i < nums.length; i++) {
+    // if (set.contains(nums[i])) {
+    // return true;
+    // }
+    // set.add(nums[i]);
+    // }
+    // return false;
+    // }
+    // }
+```
+* 第二种:相邻比较
+
+```java
+// 第二种解法，先排序，然后进行相邻比较，有重复的返回true即可
+    static class Solution {
+        public boolean containsDuplicate(int[] nums) {
+            Arrays.sort(nums);
+            for (int i = 1; i <= nums.length; i++) {
+                if (nums[i] == nums[i - 1]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+```
