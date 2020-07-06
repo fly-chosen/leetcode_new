@@ -76,7 +76,8 @@ for (int i : nums1) {
         }
     }
 ```
-###（3）最大值/最小值
+
+### (3) 最大值/最小值
 ```java
 public class max {
     public static void main(String[] args) {
