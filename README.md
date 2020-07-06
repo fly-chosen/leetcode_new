@@ -76,3 +76,18 @@ for (int i : nums1) {
         }
     }
 ```
+###（3）最大值/最小值
+```java
+public class max {
+    public static void main(String[] args) {
+        int[] arr = new int[] {2, 8, 9, 10, 8, 7, 6};
+        // 第一种解法
+        Arrays.sort(arr);
+        System.out.println(arr[arr.length - 1]);
+
+        // 第二种解法
+        System.out.println(Arrays.stream(arr).max().getAsInt());
+    }
+}
+```
+
