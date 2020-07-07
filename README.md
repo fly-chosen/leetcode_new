@@ -88,6 +88,12 @@ public class max {
 
         // 第二种解法
         System.out.println(Arrays.stream(arr).max().getAsInt());
+        //第三种解法
+        int max = 0;
+        for (int i = 0; i < arr.length; i++) {
+             max = Math.max(arr[i], max);
+        }
+
     }
 }
 ```
