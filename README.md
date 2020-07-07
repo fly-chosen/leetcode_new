@@ -98,3 +98,31 @@ public class max {
 }
 ```
 
+### （4）按照key值进行排序
+
+```java
+public class test10 {
+    public static void main(String[] args) {
+        int[] arr = new int[] {2, 8, 9, 10, 8, 7, 6};
+        // 遍历整个数组，对记录每个数值出现的次数(利用HashMap，其中key为数值，value为出现次数)；
+        Map<Integer, Long> map =
+            Arrays.stream(arr).boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (Map.Entry<Integer, Long> entry : map.entrySet()) {
+            if (entry.getValue() > 0) {
+                System.out
+                    .println("按照每个数值key出现的次数value值进行排序：" + "key是：" + entry.getKey() + " value是：" + entry.getValue());
+            }
+        }
+
+    }
+}
+```
+```
+按照每个数值key出现的次数value值进行排序：key是：2 value是：1
+按照每个数值key出现的次数value值进行排序：key是：6 value是：1
+按照每个数值key出现的次数value值进行排序：key是：7 value是：1
+按照每个数值key出现的次数value值进行排序：key是：8 value是：2
+按照每个数值key出现的次数value值进行排序：key是：9 value是：1
+按照每个数值key出现的次数value值进行排序：key是：10 value是：1
+
+```
