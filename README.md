@@ -126,3 +126,31 @@ public class test10 {
 按照每个数值key出现的次数value值进行排序：key是：10 value是：1
 
 ```
+### (5) 取数组中的key值出现的最大次数
+* 使用Map<Integer, Integer> countMap，Map的键为元素的值，Map的值为该元素出现的次数。遍历原数组后得到Map，再遍历Map找到最大的出现次数，就得到了数组的度maxCount。
+```java
+public class test11 {
+    public static void main(String[] args) {
+        int[] nums = new int[] {1, 2, 3, 1, 1, 1, 1};
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        for (int num : nums) {
+            if (countMap.containsKey(num)) {
+                countMap.put(num, countMap.get(num) + 1);
+            } else {
+                countMap.put(num, 1);
+            }
+        }
+        int maxCount = 0;
+        for (int key : countMap.keySet()) {
+            if (countMap.get(key) > maxCount) {
+                maxCount = countMap.get(key);
+            }
+        }
+        System.out.println(maxCount);
+
+    }
+}
+```
+```
+结果： 数组{1, 2, 3, 1, 1, 1, 1}中，1出现的次数是maxCount=5 次。
+```
