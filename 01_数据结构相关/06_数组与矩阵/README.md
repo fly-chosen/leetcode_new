@@ -30,3 +30,83 @@
 头部删除元素|O(N)|O(1)
 尾部插入元素|O(1)|O(1)
 尾部删除元素|O(1)|O(1)
+
+
+##  数组中重复的数字
+* 题目
+在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。示例：
+
+```
+输入：
+[2, 3, 1, 0, 2, 5, 3]
+输出：2 或 3 
+```
+
+* 题解1：排序法
+先把输出数组排序，从排序的数组中找出重复数字只需从头到尾扫描排序后的数组即可。
+
+```java
+class Solution {
+    public int findRepeatNumber(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) 
+                return nums[i];
+        }
+        return -1;
+    }
+}
+```
+> 在本方法中，对数组进行排序的时间复杂度为O(n·logn)，遍历数组的时间复杂度为O(n)，所以最终的时间复杂度为O(n·logn)，空间复杂度为O(1)。
+
+* 题解2：哈希表
+从头到尾按顺序扫描整个数组的数字，每扫描到一个数字的时候，都可以用O(1)的时间来判断哈希表里是否包含了该数字，若哈希表中还没有这个数字，就将其加入到哈希表中，若有，那就get到结果了。
+
+```java
+class Solution {
+    public int findRepeatNumber(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (set.contains(nums[i])) return nums[i];
+            set.add(nums[i]);
+        }
+        return -1;
+    }
+}
+```
+> 在本方法中，由于在哈希表中的查找的时间复杂度为O(1)，所以该方法的时间复杂度为O(n)，但其提高了时间复杂度的同时，是以开辟一个哈希表为代价的，空间复杂度为O(1)。
+
+* 题解3：手动维护哈希表
+
+```
+这道题存在一个细节，就是数组长度为n，然后数组中的数字都是在0 ~ n-1的范围内，这也就是说，如果数组中没有重复元素，那么数组中的n个元素，一定分别为0、1、……、n-1。而如果没有重复的元素，那这些元素如果排序的话，其数组中的值恰恰等于索引值！所以我们可以考虑手动维护一个哈希表，将每个元素哈希映射到其该在的位置上。
+
+* 从头到尾依次扫描数组中的每个数字n，当扫描到下标为i 的数字时 ，首先比较这个n是否等于i：
+
+ 如果是，则扫描下一个数字；
+如果不是，则将它和第n个数字进行比较：
+如果它和第n个数字相等，就找到了一个重复的数字；
+如果不相等，就把第i个数字和第n个数字交换，也就是吧数字n（第i个数字）放到它该在的位置上去
+重复上述比较，直到我们发现重复数字就可以返回结果，若遍历整个数组都没有，那么就是没有重复的数字。
+```
+```java
+class Solution {
+    public int findRepeatNumber(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            //用while表示直到将其交换到其最终位置
+            while (nums[i] != i) {
+                if (nums[nums[i]] == nums[i])
+                    return nums[i];
+                swap(nums, i, nums[i]);
+            }
+        }
+        return -1;
+    }
+    public void swap(int[] nums, int i1, int i2) {
+        int tmp = nums[i1];
+        nums[i1] = nums[i2];
+        nums[i2] = tmp;
+    }
+}
+在本方法中，时间复杂度为O(n)，空间复杂度也优化为了O(1)。
+```
