@@ -77,6 +77,26 @@ for (int i : nums1) {
     }
 ```
 
+* 第三种：打印不重复的值
+> nums = {4, 1, 4, 6} =====>不重复的值是{1,6}
+```java
+public int[] singleNumbers(int[] nums) {
+    // 题目要求出现两个一次的数字
+    int[] result = new int[2];
+    // 要求时间负责度O(n),空间复杂度O(1)
+    HashSet<Integer> set = new HashSet<>();
+    // 然后使用Hashset进行判断
+    for (int num : nums) {
+        if (set.contains(num)) {
+            set.remove(num);
+        } else {
+            set.add(num);
+        }
+    }
+    return set.stream().mapToInt(Integer::intValue).toArray();
+}
+```
+
 ### (3) 最大值/最小值
 ```java
 public class max {
