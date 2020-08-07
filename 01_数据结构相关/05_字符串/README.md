@@ -14,3 +14,8 @@ for (char c : paragraph.toCharArray()) {
 ```java
 paragraph=paragraph.toLowerCase();
 ```
+* (3) 返回指定索引处的 char 值
+```java
+char charAt(int index)
+返回指定索引处的 char 值。
+```
